@@ -45,52 +45,55 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
-#### LAB(begin solution)
-
-def word_count_dict(filename):
-  """Returns a word/count dict for this filename."""
-  # Utility used by count() and Topcount().
-  word_count = {}  # Map each word to its count
-  input_file = open(filename, 'r')
-  for line in input_file:
-    words = line.split()
+###
+def create_words_dict(file):
+  words_count = {}
+  for line in file:
+    words = clean_line(line).split()
     for word in words:
-      word = word.lower()
-      # Special case if we're seeing this word for the first time.
-      if not word in word_count:
-        word_count[word] = 1
+      if word in words_count:
+        words_count[word] += 1
       else:
-        word_count[word] = word_count[word] + 1
-  input_file.close()  # Not strictly required, but good form.
-  return word_count
+        words_count[word] = 1
+  return words_count
 
+
+def clean_line(line):
+  dirt = ['--', '`', ',', ':', '!', '?', '(', ')', '"', "*", '.', "'", ";", "[","]","_"]
+  cleaned_line = line.lower()
+  for element in dirt:
+    cleaned_line = cleaned_line.replace(element, " ")
+  return cleaned_line
+
+
+def get_key(element):
+  return element[1]
 
 def print_words(filename):
-  """Prints one per line '<word> <count>' sorted by word for the given file."""
-  word_count = word_count_dict(filename)
-  words = sorted(word_count.keys())
-  for word in words:
-    print word, word_count[word]
+  file = open(filename, 'r')
+  try:
+    words_dict = create_words_dict(file)
+    file.close()
+  except:
+    file.close()
 
-
-def get_count(word_count_tuple):
-  """Returns the count from a dict word/count tuple  -- used for custom sort."""
-  return word_count_tuple[1]
+  for word in sorted(words_dict.items()):
+    print "%s %s" %(word[0], word[1])
 
 
 def print_top(filename):
-  """Prints the top count listing for the given file."""
-  word_count = word_count_dict(filename)
+  file = open(filename, 'r')
+  try:
+    words_dict = create_words_dict(file)
+    file.close()
+  except:
+    file.close()
 
-  # Each item is a (word, count) tuple.
-  # Sort them so the big counts are first using key=get_count() to extract count.
-  items = sorted(word_count.items(), key=get_count, reverse=True)
-
-  # Print the first 20
-  for item in items[:20]:
-    print item[0], item[1]
-
-##### LAB(end solution)
+  top_20 = sorted(words_dict.items(), key=get_key, reverse=True)[:20]
+  rank = 1
+  for word in top_20:
+    print "Rank %s - %s %s" %(rank, word[0], word[1])
+    rank += 1
 
 
 # This basic command line argument parsing code is provided and
