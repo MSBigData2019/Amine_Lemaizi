@@ -80,7 +80,10 @@ def main():
 		stock_info = soup.find(class_="sectionQuoteDetail")
 		data['stock_value'] = float((stock_info.find_all('span')[1].text).strip())
 		stock_evo_text = soup.find(class_="valueContentPercent").text.replace("(", "").replace(")", "").strip()
-		data['stock_evo'] = float(stock_evo_text.replace("%", ""))/100
+		if stock_evo_text == "--":
+			data['stock_evo'] = 0
+		else:
+			data['stock_evo'] = float(stock_evo_text.replace("%", ""))/100
 
 		# Percentage of INSTITUTIONAL HOLDERS
 		per_institutional_holders_text = soup.find_all(class_='dataSmall')[-1].find(class_="data").text
