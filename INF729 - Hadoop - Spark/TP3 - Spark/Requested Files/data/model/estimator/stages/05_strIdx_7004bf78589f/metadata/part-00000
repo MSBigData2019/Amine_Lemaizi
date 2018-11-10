@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexer","timestamp":1541856278247,"sparkVersion":"2.2.0","uid":"strIdx_7004bf78589f","paramMap":{"inputCol":"currency2","outputCol":"currency_indexed","handleInvalid":"skip"}}

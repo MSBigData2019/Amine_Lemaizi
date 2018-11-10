@@ -1,0 +1,7 @@
+sbt run
+sbt run;
+;
+clean clean-files
+sbt clean clean-files
+;
+val i = 1
