@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexer","timestamp":1541856278189,"sparkVersion":"2.2.0","uid":"strIdx_1bcae4fccb18","paramMap":{"outputCol":"country_indexed","handleInvalid":"skip","inputCol":"country2"}}
