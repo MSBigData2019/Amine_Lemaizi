@@ -1,0 +1,1 @@
+To preview the Kaggle report please click on the following link : <a href='http://htmlpreview.github.io/?https://github.com/MSBigData2019/Amine_Lemaizi/blob/master/SD701%20-%20Big%20Data%20Mining/SD701_TP3_Amine_LEMAIZI.html'>Click Here</a>
